@@ -1,0 +1,21 @@
+﻿{
+    "searchKeywords":  [
+                           "card",
+                           "material card",
+                           "elevation",
+                           "shadow",
+                           "rounded card"
+                       ],
+    "id":  "card",
+    "subtitle":  "Material design panel with rounded corners, elevation, and shadow styling.",
+    "title":  "Card Widget",
+    "tags":  [
+                 "card",
+                 "elevation",
+                 "shadow",
+                 "container"
+             ],
+    "category":  "Widgets",
+    "difficulty":  "Beginner",
+    "icon":  "credit_card"
+}

@@ -1,0 +1,21 @@
+﻿{
+    "searchKeywords":  [
+                           "like button",
+                           "favorite button",
+                           "heart animation",
+                           "toggle button",
+                           "micro animation"
+                       ],
+    "id":  "like_button",
+    "subtitle":  "Interactive micro-animated favorite/like toggle button implementation.",
+    "title":  "Like Button",
+    "tags":  [
+                 "like_button",
+                 "animation",
+                 "favorite",
+                 "interactive"
+             ],
+    "category":  "Widgets",
+    "difficulty":  "Intermediate",
+    "icon":  "favorite"
+}

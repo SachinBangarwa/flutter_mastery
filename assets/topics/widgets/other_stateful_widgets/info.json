@@ -1,0 +1,24 @@
+﻿{
+    "searchKeywords":  [
+                           "stateful widgets",
+                           "switch",
+                           "checkbox",
+                           "radio",
+                           "slider",
+                           "stepper",
+                           "interactive widgets"
+                       ],
+    "id":  "other_stateful_widgets",
+    "subtitle":  "Overview of common stateful widgets like Switch, Checkbox, Radio, Slider, and Stepper.",
+    "title":  "Other Stateful Widgets",
+    "tags":  [
+                 "stateful",
+                 "switch",
+                 "checkbox",
+                 "slider",
+                 "radio"
+             ],
+    "category":  "Widgets",
+    "difficulty":  "Beginner",
+    "icon":  "toggle_on"
+}

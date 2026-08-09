@@ -1,0 +1,21 @@
+﻿{
+    "searchKeywords":  [
+                           "image",
+                           "network image",
+                           "asset image",
+                           "boxfit",
+                           "cached network image"
+                       ],
+    "id":  "image",
+    "subtitle":  "Render images from asset, network, file, and memory sources with BoxFit modes.",
+    "title":  "Image Widget",
+    "tags":  [
+                 "image",
+                 "assets",
+                 "network image",
+                 "media"
+             ],
+    "category":  "Widgets",
+    "difficulty":  "Beginner",
+    "icon":  "image"
+}

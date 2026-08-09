@@ -1,0 +1,21 @@
+﻿{
+    "searchKeywords":  [
+                           "icon",
+                           "icons",
+                           "material icons",
+                           "icon button",
+                           "flutter icon"
+                       ],
+    "id":  "icon",
+    "subtitle":  "Display scalable icons from Material, Cupertino, or custom icon fonts.",
+    "title":  "Icon Widget",
+    "tags":  [
+                 "icon",
+                 "material",
+                 "ui",
+                 "basic"
+             ],
+    "category":  "Widgets",
+    "difficulty":  "Beginner",
+    "icon":  "insert_emoticon"
+}

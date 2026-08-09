@@ -1,0 +1,29 @@
+{
+  "id": "buttons",
+  "title": "Flutter Buttons",
+  "subtitle": "Master ElevatedButton, TextButton, OutlinedButton, IconButton, and FloatingActionButton with custom styles and states.",
+  "category": "Widgets",
+  "difficulty": "Beginner",
+  "tags": [
+    "buttons",
+    "elevatedbutton",
+    "textbutton",
+    "outlinedbutton",
+    "iconbutton",
+    "floatingactionbutton",
+    "material"
+  ],
+  "icon": "smart_button",
+  "searchKeywords": [
+    "buttons",
+    "elevated button",
+    "text button",
+    "outlined button",
+    "icon button",
+    "fab",
+    "floating action button",
+    "button style",
+    "button press",
+    "onpressed"
+  ]
+}

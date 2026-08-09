@@ -1,0 +1,21 @@
+﻿{
+    "searchKeywords":  [
+                           "textfield",
+                           "user input",
+                           "text editing controller",
+                           "keyboard input",
+                           "forms"
+                       ],
+    "id":  "textfield",
+    "subtitle":  "Capture user keyboard input with text editing controllers and basic formatting.",
+    "title":  "TextField Widget",
+    "tags":  [
+                 "input",
+                 "textfield",
+                 "forms",
+                 "controller"
+             ],
+    "category":  "Widgets",
+    "difficulty":  "Beginner",
+    "icon":  "edit"
+}
