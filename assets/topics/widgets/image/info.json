@@ -1,21 +1,32 @@
-﻿{
-    "searchKeywords":  [
-                           "image",
-                           "network image",
-                           "asset image",
-                           "boxfit",
-                           "cached network image"
-                       ],
-    "id":  "image",
-    "subtitle":  "Render images from asset, network, file, and memory sources with BoxFit modes.",
-    "title":  "Image Widget",
-    "tags":  [
-                 "image",
-                 "assets",
-                 "network image",
-                 "media"
-             ],
-    "category":  "Widgets",
-    "difficulty":  "Beginner",
-    "icon":  "image"
+{
+  "id": "image",
+  "title": "Image Widget",
+  "subtitle": "Display images from various sources such as assets, network, files, or memory.",
+  "category": "widgets",
+  "difficulty": "beginner",
+  "tags": ["image", "media", "ui", "basic"],
+  "searchKeywords": ["image", "network image", "asset image", "media", "flutter image"],
+  "previewType": "image",
+  "properties": [
+    {
+      "name": "image",
+      "usage": "image: NetworkImage('https://example.com/pic.jpg')",
+      "description": "The image provider that supplies the actual image pixels (AssetImage, NetworkImage, etc.)."
+    },
+    {
+      "name": "fit",
+      "usage": "fit: BoxFit.cover",
+      "description": "How the image should fill its container bounds (cover, contain, fill, etc.)."
+    },
+    {
+      "name": "width & height",
+      "usage": "width: 200.0\nheight: 150.0",
+      "description": "Sets the explicit layout bounds of the image container."
+    },
+    {
+      "name": "repeat",
+      "usage": "repeat: ImageRepeat.repeat",
+      "description": "Determines how the image tiles to fill empty spaces when bounds exceed source dimensions."
+    }
+  ]
 }

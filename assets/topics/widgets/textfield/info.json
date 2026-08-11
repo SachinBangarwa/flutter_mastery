@@ -1,21 +1,32 @@
-﻿{
-    "searchKeywords":  [
-                           "textfield",
-                           "user input",
-                           "text editing controller",
-                           "keyboard input",
-                           "forms"
-                       ],
-    "id":  "textfield",
-    "subtitle":  "Capture user keyboard input with text editing controllers and basic formatting.",
-    "title":  "TextField Widget",
-    "tags":  [
-                 "input",
-                 "textfield",
-                 "forms",
-                 "controller"
-             ],
-    "category":  "Widgets",
-    "difficulty":  "Beginner",
-    "icon":  "edit"
+{
+  "id": "textfield",
+  "title": "TextField Widget",
+  "subtitle": "Accept text inputs from the user with custom decorations and keyboard types.",
+  "category": "widgets",
+  "difficulty": "beginner",
+  "tags": ["textfield", "input", "form", "ui", "basic"],
+  "searchKeywords": ["textfield", "input field", "text input", "form field", "flutter input"],
+  "previewType": "textfield",
+  "properties": [
+    {
+      "name": "controller",
+      "usage": "controller: TextEditingController()",
+      "description": "An object that controls the text being edited, allowing you to read or pre-fill text programmatically."
+    },
+    {
+      "name": "decoration",
+      "usage": "decoration: InputDecoration(labelText: 'Username')",
+      "description": "Configures input styling, borders, colors, placeholder text, and leading/trailing icons."
+    },
+    {
+      "name": "keyboardType",
+      "usage": "keyboardType: TextInputType.emailAddress",
+      "description": "Configures which virtual keyboard layout to present to the user (text, numbers, email, etc.)."
+    },
+    {
+      "name": "obscureText",
+      "usage": "obscureText: true",
+      "description": "Whether to hide the characters being typed (most commonly used for passwords)."
+    }
+  ]
 }

@@ -2,8 +2,8 @@
   "id": "buttons",
   "title": "Flutter Buttons",
   "subtitle": "Master ElevatedButton, TextButton, OutlinedButton, IconButton, and FloatingActionButton with custom styles and states.",
-  "category": "Widgets",
-  "difficulty": "Beginner",
+  "category": "widgets",
+  "difficulty": "beginner",
   "tags": [
     "buttons",
     "elevatedbutton",
@@ -25,5 +25,23 @@
     "button style",
     "button press",
     "onpressed"
+  ],
+  "previewType": "buttons",
+  "properties": [
+    {
+      "name": "onPressed",
+      "usage": "onPressed: () => print('Button Clicked!')",
+      "description": "Callback function triggered when the user taps the button. Set to null to disable the button."
+    },
+    {
+      "name": "child",
+      "usage": "child: Text('Submit')",
+      "description": "The primary content displayed inside the button (usually a Text or Icon widget)."
+    },
+    {
+      "name": "style",
+      "usage": "style: ElevatedButton.styleFrom(backgroundColor: Colors.blue)",
+      "description": "Applies visual styles including background color, foreground color, padding, elevation, and shape."
+    }
   ]
 }

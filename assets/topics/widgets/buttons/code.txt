@@ -1,0 +1,35 @@
+Column(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    ElevatedButton(
+      onPressed: () {},
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.blueAccent,
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+      child: const Text('Elevated Button'),
+    ),
+    const SizedBox(height: 12),
+    OutlinedButton(
+      onPressed: () {},
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.blueAccent,
+        side: const BorderSide(color: Colors.blueAccent, width: 2),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+      child: const Text('Outlined Button'),
+    ),
+    const SizedBox(height: 12),
+    TextButton(
+      onPressed: () {},
+      child: const Text('Text Button'),
+    ),
+  ],
+)

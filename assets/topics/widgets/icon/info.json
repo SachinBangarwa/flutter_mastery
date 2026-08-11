@@ -1,21 +1,32 @@
-﻿{
-    "searchKeywords":  [
-                           "icon",
-                           "icons",
-                           "material icons",
-                           "icon button",
-                           "flutter icon"
-                       ],
-    "id":  "icon",
-    "subtitle":  "Display scalable icons from Material, Cupertino, or custom icon fonts.",
-    "title":  "Icon Widget",
-    "tags":  [
-                 "icon",
-                 "material",
-                 "ui",
-                 "basic"
-             ],
-    "category":  "Widgets",
-    "difficulty":  "Beginner",
-    "icon":  "insert_emoticon"
+{
+  "id": "icon",
+  "title": "Icon Widget",
+  "subtitle": "Render scalable vector symbols from the Material design library.",
+  "category": "widgets",
+  "difficulty": "beginner",
+  "tags": ["icon", "visual", "ui", "basic"],
+  "searchKeywords": ["icon", "material icon", "vector icon", "symbols", "flutter icon"],
+  "previewType": "icon",
+  "properties": [
+    {
+      "name": "icon",
+      "usage": "icon: Icons.favorite_rounded",
+      "description": "The IconData symbol to render (typically from the Icons class)."
+    },
+    {
+      "name": "size",
+      "usage": "size: 40.0",
+      "description": "The size of the icon in logical pixels. Defaults to 24.0."
+    },
+    {
+      "name": "color",
+      "usage": "color: Colors.pink",
+      "description": "The color used to paint the vector symbol."
+    },
+    {
+      "name": "semanticLabel",
+      "usage": "semanticLabel: 'Heart Icon'",
+      "description": "A text description of the icon for screen readers to assist in accessibility."
+    }
+  ]
 }

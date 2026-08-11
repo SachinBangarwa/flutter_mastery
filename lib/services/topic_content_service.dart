@@ -6,7 +6,7 @@ import 'package:flutter_mastery/models/topic_model.dart';
 class TopicContentService {
   // Registry of category to its constituent topic IDs.
   static const Map<String, List<String>> _categoryTopics = {
-    'widgets': ['container', 'text', 'card'],
+    'widgets': ['container', 'text', 'card', 'icon', 'image', 'buttons', 'textfield'],
   };
 
   /// Resolves the category for a topic ID dynamically.
