@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mastery/core/theme/app_colors.dart';
 import 'package:flutter_mastery/core/theme/app_text_styles.dart';
+import 'package:flutter_mastery/core/storage/storage_helper.dart';
 import 'package:flutter_mastery/dash/screens/main_screen.dart';
 
 class OnbScreen extends StatefulWidget {
@@ -62,8 +63,14 @@ class _OnbScreenState extends State<OnbScreen> {
     );
   }
 
-  void _navigateToHome() {
-   Navigator.push(context, MaterialPageRoute(builder: (context)=>MainScreen()));
+  void _navigateToHome() async {
+    await StorageHelper.setLoggedIn(true);
+    if (mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const MainScreen()),
+      );
+    }
   }
 
   @override

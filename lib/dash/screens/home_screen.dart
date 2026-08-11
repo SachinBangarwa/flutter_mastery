@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mastery/core/theme/app_colors.dart';
 import 'package:flutter_mastery/core/theme/app_text_styles.dart';
+import 'package:flutter_mastery/features/topic/screens/category_topics_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -68,65 +69,37 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.darkBackground,
-      body: SafeArea(
-        child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            // Top App Header
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 16.0, 20.0, 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Home',
-                      style: AppTextStyles.displayMedium(
-                        color: AppColors.darkTextPrimary,
-                      ).copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    Stack(
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.notifications_none_rounded,
-                            color: AppColors.darkTextPrimary,
-                            size: 26,
-                          ),
-                        ),
-                        Positioned(
-                          right: 12,
-                          top: 12,
-                          child: Container(
-                            height: 8,
-                            width: 8,
-                            decoration: const BoxDecoration(
-                              color: AppColors.primary,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 130.0,
+            pinned: true,
+            floating: true,
+            snap: true,
+            backgroundColor: AppColors.darkBackground,
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: false,
+              titlePadding: const EdgeInsets.only(left: 20.0, bottom: 66.0),
+              title: Text(
+                'Home',
+                style: AppTextStyles.headingLarge(
+                  color: AppColors.darkTextPrimary,
+                ).copyWith(fontWeight: FontWeight.bold),
               ),
+              background: Container(color: AppColors.darkBackground),
             ),
-
-            // Search Bar Input Field
-            SliverToBoxAdapter(
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(60.0),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 12.0),
                 child: Container(
-                  height: 50,
+                  height: 48,
                   decoration: BoxDecoration(
                     color: AppColors.darkSurface,
                     borderRadius: BorderRadius.circular(14),
-                    border: Border.all(
-                      color: AppColors.darkBorder,
-                      width: 1.0,
-                    ),
+                    border: Border.all(color: AppColors.darkBorder, width: 1.0),
                   ),
                   child: TextField(
                     style: AppTextStyles.bodyMedium(
@@ -151,42 +124,31 @@ class HomeScreen extends StatelessWidget {
                         onPressed: () {},
                       ),
                       border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 14),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 13),
                     ),
                   ),
                 ),
               ),
             ),
-
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 24),
-            ),
-
-            // 8 Category Grid Cards
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              sliver: SliverGrid(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final item = _categories[index];
-                    return _CategoryCard(data: item);
-                  },
-                  childCount: _categories.length,
-                ),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 14,
-                  mainAxisSpacing: 14,
-                  childAspectRatio: 1.15,
-                ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            sliver: SliverGrid(
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final item = _categories[index];
+                return _CategoryCard(data: item);
+              }, childCount: _categories.length),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 14,
+                mainAxisSpacing: 14,
+                childAspectRatio: 1.15,
               ),
             ),
+          ),
 
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 24),
-            ),
-          ],
-        ),
+          const SliverToBoxAdapter(child: SizedBox(height: 60)),
+        ],
       ),
     );
   }
@@ -219,17 +181,18 @@ class _CategoryCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.darkSurface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: AppColors.darkBorder,
-          width: 1.0,
-        ),
+        border: Border.all(color: AppColors.darkBorder, width: 1.0),
       ),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Opening ${data.title}...')),
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    CategoryTopicsScreen(category: data.title),
+              ),
             );
           },
           borderRadius: BorderRadius.circular(16),
@@ -254,11 +217,7 @@ class _CategoryCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Icon(
-                    data.icon,
-                    color: Colors.white,
-                    size: 22,
-                  ),
+                  child: Icon(data.icon, color: Colors.white, size: 22),
                 ),
 
                 // Title & Subtitle Labels
@@ -269,9 +228,7 @@ class _CategoryCard extends StatelessWidget {
                       data.title,
                       style: AppTextStyles.headingSmall(
                         color: AppColors.darkTextPrimary,
-                      ).copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      ).copyWith(fontWeight: FontWeight.bold),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),

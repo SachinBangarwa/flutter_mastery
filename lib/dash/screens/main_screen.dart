@@ -13,7 +13,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
-  // Navigation tab screens
   final List<Widget> _screens = const [
     HomeScreen(),
     _TabPlaceholder(title: 'Explore Screen'),
@@ -48,18 +47,12 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.darkBackground,
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _screens,
-      ),
+      body: IndexedStack(index: _currentIndex, children: _screens),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           color: AppColors.darkSurface,
           border: Border(
-            top: BorderSide(
-              color: AppColors.darkBorder,
-              width: 1.0,
-            ),
+            top: BorderSide(color: AppColors.darkBorder, width: 1.0),
           ),
         ),
         child: SafeArea(
@@ -103,15 +96,16 @@ class _MainScreenState extends State<MainScreen> {
                           const SizedBox(height: 4),
                           Text(
                             item.label,
-                            style: AppTextStyles.labelSmall(
-                              color: isSelected
-                                  ? AppColors.primary
-                                  : AppColors.darkTextSecondary,
-                            ).copyWith(
-                              fontWeight: isSelected
-                                  ? FontWeight.w600
-                                  : FontWeight.w400,
-                            ),
+                            style:
+                                AppTextStyles.labelSmall(
+                                  color: isSelected
+                                      ? AppColors.primary
+                                      : AppColors.darkTextSecondary,
+                                ).copyWith(
+                                  fontWeight: isSelected
+                                      ? FontWeight.w600
+                                      : FontWeight.w400,
+                                ),
                           ),
                         ],
                       ),
@@ -149,9 +143,7 @@ class _TabPlaceholder extends StatelessWidget {
     return Center(
       child: Text(
         title,
-        style: AppTextStyles.headingLarge(
-          color: AppColors.darkTextPrimary,
-        ),
+        style: AppTextStyles.headingLarge(color: AppColors.darkTextPrimary),
       ),
     );
   }

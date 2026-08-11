@@ -1,0 +1,10 @@
+{
+  "id": "container",
+  "title": "Container",
+  "subtitle": "A versatile widget for layout, styling and decoration",
+  "category": "widgets",
+  "difficulty": "beginner",
+  "tags": ["widget", "layout", "decoration"],
+  "searchKeywords": ["container", "box", "decoration", "padding", "margin"],
+  "previewType": "container"
+}

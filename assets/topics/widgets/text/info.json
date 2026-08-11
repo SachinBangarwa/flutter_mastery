@@ -1,21 +1,10 @@
-﻿{
-    "searchKeywords":  [
-                           "text",
-                           "text style",
-                           "display text",
-                           "string ui",
-                           "flutter text"
-                       ],
-    "id":  "text",
-    "subtitle":  "Display styled text with single or multiple lines in Flutter.",
-    "title":  "Text Widget",
-    "tags":  [
-                 "text",
-                 "style",
-                 "ui",
-                 "basic"
-             ],
-    "category":  "Widgets",
-    "difficulty":  "Beginner",
-    "icon":  "text_fields"
+{
+  "id": "text",
+  "title": "Text Widget",
+  "subtitle": "Display styled text with single or multiple lines in Flutter.",
+  "category": "widgets",
+  "difficulty": "beginner",
+  "tags": ["text", "style", "ui", "basic"],
+  "searchKeywords": ["text", "text style", "display text", "string ui", "flutter text"],
+  "previewType": "text"
 }
