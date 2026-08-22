@@ -69,11 +69,18 @@ flutter:
     - assets/topics/widgets/image/
     - assets/topics/widgets/imagefiltered/
     - assets/topics/widgets/like_button/
-    - assets/topics/widgets/other_stateful_widgets/
     - assets/topics/widgets/text/
     - assets/topics/widgets/textfield/
     - assets/topics/widgets/textformfield/
     - assets/topics/widgets/typography/
+    - assets/topics/widgets/appbar/
+    - assets/topics/widgets/row/
+    - assets/topics/widgets/column/
+    - assets/topics/widgets/listview/
+    - assets/topics/widgets/gridview/
+    - assets/topics/widgets/stack/
+    - assets/topics/widgets/sizedbox/
+    - assets/topics/widgets/divider/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

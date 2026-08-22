@@ -6,6 +6,16 @@ import 'package:flutter_mastery/live_previews/widgets/icon_preview.dart';
 import 'package:flutter_mastery/live_previews/widgets/image_preview.dart';
 import 'package:flutter_mastery/live_previews/widgets/buttons_preview.dart';
 import 'package:flutter_mastery/live_previews/widgets/textfield_preview.dart';
+import 'package:flutter_mastery/live_previews/widgets/dropdownbutton_preview.dart';
+import 'package:flutter_mastery/live_previews/widgets/textformfield_preview.dart';
+import 'package:flutter_mastery/live_previews/widgets/appbar_preview.dart';
+import 'package:flutter_mastery/live_previews/widgets/row_preview.dart';
+import 'package:flutter_mastery/live_previews/widgets/column_preview.dart';
+import 'package:flutter_mastery/live_previews/widgets/listview_preview.dart';
+import 'package:flutter_mastery/live_previews/widgets/gridview_preview.dart';
+import 'package:flutter_mastery/live_previews/widgets/stack_preview.dart';
+import 'package:flutter_mastery/live_previews/widgets/sizedbox_preview.dart';
+import 'package:flutter_mastery/live_previews/widgets/divider_preview.dart';
 
 /// Registry mapping preview types from `info.json` (e.g. `"container"`) to the corresponding preview widget.
 Widget getTopicPreview(String previewType) {
@@ -24,6 +34,26 @@ Widget getTopicPreview(String previewType) {
       return const ButtonsPreview();
     case 'textfield':
       return const TextFieldPreview();
+    case 'dropdownbutton':
+      return const DropdownButtonPreview();
+    case 'textformfield':
+      return const TextFormFieldPreview();
+    case 'appbar':
+      return const AppBarPreview();
+    case 'row':
+      return const RowPreview();
+    case 'column':
+      return const ColumnPreview();
+    case 'listview':
+      return const ListViewPreview();
+    case 'gridview':
+      return const GridViewPreview();
+    case 'stack':
+      return const StackPreview();
+    case 'sizedbox':
+      return const SizedBoxPreview();
+    case 'divider':
+      return const DividerPreview();
     default:
       return const Center(
         child: Padding(

@@ -1,6 +1,0 @@
-Icon(
-  Icons.favorite_rounded,
-  size: 64.0,
-  color: Colors.pinkAccent,
-  semanticLabel: 'Heart Favorite Icon',
-)
