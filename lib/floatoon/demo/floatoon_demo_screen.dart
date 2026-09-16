@@ -15,9 +15,7 @@ class _FloatoonDemoScreenState extends State<FloatoonDemoScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = FloatoonController(
-      characterSize: const Size(60, 60),
-    );
+    _controller = FloatoonController(characterSize: const Size(60, 60));
   }
 
   @override
@@ -69,8 +67,13 @@ class _FloatoonDemoScreenState extends State<FloatoonDemoScreen> {
                     ),
                     CircleAvatar(
                       radius: 22,
-                      backgroundColor: const Color(0xFF6366F1).withValues(alpha: 0.15),
-                      child: const Icon(Icons.person_rounded, color: Color(0xFF6366F1)),
+                      backgroundColor: const Color(
+                        0xFF6366F1,
+                      ).withValues(alpha: 0.15),
+                      child: const Icon(
+                        Icons.person_rounded,
+                        color: Color(0xFF6366F1),
+                      ),
                     ),
                   ],
                 ),
@@ -100,7 +103,10 @@ class _FloatoonDemoScreenState extends State<FloatoonDemoScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.white.withValues(alpha: 0.22),
                           borderRadius: BorderRadius.circular(20),

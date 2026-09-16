@@ -68,7 +68,10 @@ class FloatoonWidget extends StatelessWidget {
                     child: SizedBox(
                       width: size.width,
                       height: size.height,
-                      child: Lottie.asset(lottieAssetPath, fit: BoxFit.contain),
+                      child: Transform.scale(
+                        scale: 1.25,
+                        child: Lottie.asset(lottieAssetPath, fit: BoxFit.contain),
+                      ),
                     ),
                   ),
                 ),

@@ -36,28 +36,30 @@ class _FloatoonOverlayState extends State<FloatoonOverlay>
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final Size size = Size(constraints.maxWidth, constraints.maxHeight);
-        widget.controller.updateScreenSize(size);
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final Size size = Size(constraints.maxWidth, constraints.maxHeight);
+          widget.controller.updateScreenSize(size);
 
-        return Stack(
-          fit: StackFit.expand,
-          clipBehavior: Clip.none,
-          children: [
-            // Underlying application content (receives normal touches)
-            widget.child,
+          return Stack(
+            fit: StackFit.expand,
+            clipBehavior: Clip.none,
+            children: [
+              // Underlying application content (receives normal touches)
+              widget.child,
 
-            // Floating in-app character overlay (only the character consumes touches)
-            if (widget.enabled)
-              FloatoonWidget(
-                controller: widget.controller,
-                lottieAssetPath: widget.lottieAssetPath,
-                onTap: widget.onCharacterTap,
-              ),
-          ],
-        );
-      },
+              // Floating in-app character overlay (only the character consumes touches)
+              if (widget.enabled)
+                FloatoonWidget(
+                  controller: widget.controller,
+                  lottieAssetPath: widget.lottieAssetPath,
+                  onTap: widget.onCharacterTap,
+                ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

@@ -72,8 +72,8 @@ class FloatoonController extends ChangeNotifier {
 
     final double maxY = _bottomFloorY;
     if (isFirstTime || _currentOffset == Offset.zero) {
-      // Start at bottom-left corner
-      _currentOffset = Offset(20, maxY);
+      // Start at bottom-left corner touching the edges
+      _currentOffset = Offset(_minX, maxY);
       _isFacingRight = true;
       _walkPassCount = 0;
       _state = FloatoonState.bottomWalk;
@@ -83,13 +83,20 @@ class FloatoonController extends ChangeNotifier {
     notifyListeners();
   }
 
-  double get _maxX => (_screenSize.width - characterSize.width).clamp(0.0, double.infinity);
-  double get _bottomFloorY => (_screenSize.height - characterSize.height - 25.0).clamp(0.0, double.infinity);
-  double get _topCeilingY => 30.0;
+  // Screen boundary compensation for internal transparent padding in Lottie vector art
+  // so the visible character art physically touches all 4 screen edges
+  static const double _edgeBleedX = 6.0;
+  static const double _edgeBleedTop = 5.0;
+  static const double _edgeBleedBottom = 4.0;
+
+  double get _minX => -_edgeBleedX;
+  double get _maxX => (_screenSize.width - characterSize.width + _edgeBleedX).clamp(_minX, double.infinity);
+  double get _topCeilingY => -_edgeBleedTop;
+  double get _bottomFloorY => (_screenSize.height - characterSize.height + _edgeBleedBottom).clamp(_topCeilingY, double.infinity);
 
   void _clampPosition() {
     _currentOffset = Offset(
-      _currentOffset.dx.clamp(0.0, _maxX),
+      _currentOffset.dx.clamp(_minX, _maxX),
       _currentOffset.dy.clamp(_topCeilingY, _bottomFloorY),
     );
   }
@@ -127,13 +134,14 @@ class FloatoonController extends ChangeNotifier {
   void _startBottomWalk() {
     _state = FloatoonState.bottomWalk;
     _walkPassCount = 0;
-    // 2, 3, or 4 passes so it alternates landing on Left and Right!
+    // 2, 3, or 4 passes so it alternates landing on Left and Right
     _targetPasses = 2 + _random.nextInt(3);
     _isWalkPaused = false;
     _walkPauseTimer?.cancel();
 
     // Walk towards opposite wall along the bottom
-    final bool isNearLeft = _currentOffset.dx <= (_maxX / 2);
+    final double midX = (_minX + _maxX) / 2;
+    final bool isNearLeft = _currentOffset.dx <= midX;
     _isFacingRight = isNearLeft;
 
     _scheduleNextMidPause();
@@ -143,8 +151,8 @@ class FloatoonController extends ChangeNotifier {
   void _scheduleNextMidPause() {
     // 60% chance to schedule a random breather stop mid-walk
     if (_random.nextDouble() < 0.60) {
-      // Pick random spot between 25% and 75% of bottom floor
-      _nextMidPauseX = _maxX * (0.25 + _random.nextDouble() * 0.50);
+      final double span = _maxX - _minX;
+      _nextMidPauseX = _minX + (span * (0.25 + _random.nextDouble() * 0.50));
     } else {
       _nextMidPauseX = null;
     }
@@ -192,8 +200,8 @@ class FloatoonController extends ChangeNotifier {
       }
     } else {
       currentX -= _walkSpeed * dt;
-      if (currentX <= 0) {
-        currentX = 0;
+      if (currentX <= _minX) {
+        currentX = _minX;
         _walkPassCount++;
         // If finished target passes, climb up the LEFT wall!
         if (_walkPassCount >= _targetPasses) {
@@ -210,7 +218,7 @@ class FloatoonController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // --- Step 2: Flying Up (Randomly along Left wall OR Right wall) ---
+  // --- Step 2: Flying Up (Climbs along Left wall OR Right wall only) ---
 
   void _startFlyingUp({bool? onLeft}) {
     _state = FloatoonState.flyingUp;
@@ -221,20 +229,20 @@ class FloatoonController extends ChangeNotifier {
     if (onLeft != null) {
       _activeWallIsLeft = onLeft;
     } else {
-      _activeWallIsLeft = _currentOffset.dx <= (_maxX / 2);
+      _activeWallIsLeft = _currentOffset.dx <= ((_minX + _maxX) / 2);
     }
 
-    final double targetX = _activeWallIsLeft ? 0.0 : _maxX;
+    final double targetX = _activeWallIsLeft ? _minX : _maxX;
     _currentOffset = Offset(targetX, _currentOffset.dy);
     _isFacingRight = _activeWallIsLeft; // Face inward towards screen
     notifyListeners();
   }
 
   void _stepFlyingUp(double dt) {
-    final double targetX = _activeWallIsLeft ? 0.0 : _maxX;
+    final double targetX = _activeWallIsLeft ? _minX : _maxX;
     double nextY = _currentOffset.dy - (_flySpeedY * dt);
 
-    // Check if reached top end
+    // Check if reached top ceiling
     if (nextY <= _topCeilingY) {
       nextY = _topCeilingY;
       // Reached top! Descend smoothly down along this same wall
@@ -246,30 +254,22 @@ class FloatoonController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // --- Step 3: Falling Down (Descends down along Left or Right wall) ---
+  // --- Step 3: Falling Down (Drops straight down vertically from release position) ---
 
   void _stepFallingDown(double dt) {
-    double nextY = _currentOffset.dy + (_fallSpeed * dt);
-
-    final double targetX = _activeWallIsLeft ? 0.0 : _maxX;
-    double nextX = _currentOffset.dx;
-    if ((nextX - targetX).abs() > 1.0) {
-      nextX = nextX + (targetX - nextX) * (dt * 8.0);
-    } else {
-      nextX = targetX;
-    }
+    final double nextY = _currentOffset.dy + (_fallSpeed * dt);
+    // User release in center: fall straight down without steering left or right!
+    final double currentX = _currentOffset.dx;
 
     final double maxY = _bottomFloorY;
     if (nextY >= maxY) {
-      nextY = maxY;
-      _currentOffset = Offset(targetX, maxY);
-      // Landed on bottom edge -> Stop for 4 to 5 seconds
+      _currentOffset = Offset(currentX, maxY);
+      // Landed on bottom edge -> Stop and rest for 4 to 5 seconds
       _startBottomRest();
       return;
     }
 
-    _currentOffset = Offset(nextX, nextY);
-    _isFacingRight = _activeWallIsLeft;
+    _currentOffset = Offset(currentX, nextY);
     notifyListeners();
   }
 
@@ -292,14 +292,24 @@ class FloatoonController extends ChangeNotifier {
   }
 
   void _chooseNextRoutine() {
-    // Random routine after rest:
+    // If dropped in the middle of the bottom floor by user, walk along the bottom floor to a wall
+    final bool isAtLeftWall = (_currentOffset.dx - _minX).abs() < 5.0;
+    final bool isAtRightWall = (_currentOffset.dx - _maxX).abs() < 5.0;
+
+    if (!isAtLeftWall && !isAtRightWall) {
+      // Walk towards wall along the bottom floor
+      _startBottomWalk();
+      return;
+    }
+
+    // It is at one of the walls (Left or Right)
+    // Random routine:
     // 50% chance: walk along bottom
-    // 50% chance: climb up along the current wall (Left or Right)
+    // 50% chance: climb up along this wall
     if (_random.nextBool()) {
       _startBottomWalk();
     } else {
-      final bool isNearLeft = _currentOffset.dx <= (_maxX / 2);
-      _startFlyingUp(onLeft: isNearLeft);
+      _startFlyingUp(onLeft: isAtLeftWall);
     }
   }
 
@@ -328,7 +338,7 @@ class FloatoonController extends ChangeNotifier {
 
   /// Places character slightly above user's finger so the finger doesn't block the cartoon
   void _updatePositionAboveFinger(Offset fingerPos) {
-    final double targetX = (fingerPos.dx - (characterSize.width / 2)).clamp(0.0, _maxX);
+    final double targetX = (fingerPos.dx - (characterSize.width / 2)).clamp(_minX, _maxX);
     // Keep character ~25px above finger position
     final double targetY = (fingerPos.dy - characterSize.height - 25.0).clamp(_topCeilingY, _bottomFloorY);
 
@@ -341,10 +351,10 @@ class FloatoonController extends ChangeNotifier {
 
     // If released near bottom floor without upward fling:
     if (_currentOffset.dy >= maxY - 40.0 && flingVelocity.dy >= -100) {
+      _currentOffset = Offset(_currentOffset.dx, maxY);
       _startBottomRest();
     } else {
-      // Released in the air: assign closest wall to descend along
-      _activeWallIsLeft = _currentOffset.dx <= (_maxX / 2);
+      // Released in the air: fall straight down vertically from current position!
       _state = FloatoonState.fallingDown;
     }
     notifyListeners();
