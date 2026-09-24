@@ -336,11 +336,11 @@ class FloatoonController extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Places character slightly above user's finger so the finger doesn't block the cartoon
+  /// Places character comfortably above user's finger so the finger doesn't block the cartoon
   void _updatePositionAboveFinger(Offset fingerPos) {
     final double targetX = (fingerPos.dx - (characterSize.width / 2)).clamp(_minX, _maxX);
-    // Keep character ~25px above finger position
-    final double targetY = (fingerPos.dy - characterSize.height - 25.0).clamp(_topCeilingY, _bottomFloorY);
+    // Keep character ~55px above finger position so it is fully visible above the finger
+    final double targetY = (fingerPos.dy - characterSize.height - 55.0).clamp(_topCeilingY, _bottomFloorY);
 
     _currentOffset = Offset(targetX, targetY);
   }

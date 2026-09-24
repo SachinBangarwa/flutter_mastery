@@ -34,12 +34,20 @@ class FloatoonWidget extends StatelessWidget {
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: onTap,
+            onTapDown: (details) =>
+                controller.onDragStart(details.globalPosition),
+            onTapUp: (details) {
+              controller.onDragEnd(Offset.zero);
+              onTap?.call();
+            },
+            onTapCancel: () => controller.onDragEnd(Offset.zero),
             onPanStart: (details) =>
                 controller.onDragStart(details.globalPosition),
             onPanUpdate: (details) =>
                 controller.onDragUpdate(details.globalPosition, details.delta),
             onPanEnd: (details) =>
                 controller.onDragEnd(details.velocity.pixelsPerSecond),
+            onPanCancel: () => controller.onDragEnd(Offset.zero),
             child: Stack(
               clipBehavior: Clip.none,
               alignment: Alignment.center,
