@@ -1,9 +1,18 @@
 /// Floatoon Library
 ///
-/// A lightweight, in-app interactive floating character companion with Lottie animation,
-/// automatic routine (bottom stroll rounds, fly to top, gravity drop, and bottom rest),
-/// and touch dragging placed above user's finger.
+/// A lightweight, in-app interactive floating character companion system supporting:
+/// - Single & Dual characters (Couple / Pairs)
+/// - Target tracking & following (Hug, Kiss, Propose)
+/// - Action popup menus & interactive animations
+/// - WebSocket & Firebase ready architecture
+/// - Seamless support for both Lottie vector and animated GIFs / images
 library;
+
+// Models
+export 'models/floatoon_action.dart';
+
+// Services
+export 'services/floatoon_websocket_bridge.dart';
 
 // Controllers
 export 'controllers/floatoon_controller.dart';
